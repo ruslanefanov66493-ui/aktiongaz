@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="Актион газ">
+  <title>Актион газ</title>
+  <path d="M44 62 H30 A22 22 0 0 0 30 106 H104" fill="none" stroke="#0057A8" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M78 62 H104" fill="none" stroke="#0057A8" stroke-width="12" stroke-linecap="round"/>
+  <path d="M61 6 C 85 33, 92 54, 61 70 C 30 54, 37 33, 61 6 Z M65.5 22 C 76 35, 70 44, 63 50 C 59 54, 58 58, 60 63 C 50 56, 51 48, 57 42 C 63 36, 66.5 31, 65.5 22 Z" fill="#E31C23" fill-rule="evenodd"/>
+</svg>
