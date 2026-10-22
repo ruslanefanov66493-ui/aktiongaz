@@ -330,7 +330,7 @@ h3 { font-size: var(--fs-h3); letter-spacing: -0.02em; }
   gap: calc(var(--nav-inset) - 0.7rem);
   width: min(100%, 1180px);
   height: var(--nav-h);
-  padding: 0 var(--nav-inset);
+  padding: 0 2rem 0 var(--nav-inset);
   border-radius: var(--r-pill);
   --glass-bg: rgba(255, 255, 255, 0.62);
   --glass-bg-strong: rgba(255, 255, 255, 0.8);
@@ -358,7 +358,7 @@ h3 { font-size: var(--fs-h3); letter-spacing: -0.02em; }
 }
 .nav-list a:hover { background: rgba(11, 15, 20, 0.06); color: var(--ink); }
 .nav-list .is-current > a, .nav-list .current-menu-item > a, .nav-list .current_page_item > a { color: var(--red); }
-.nav-right { display: flex; align-items: center; gap: calc(var(--nav-inset) - 0.7rem); }
+.nav-right { display: flex; align-items: center; gap: 1.5rem; }
 .nav-phone { display: inline-flex; align-items: center; min-height: 36px; padding: 0 0.7rem; border-radius: var(--r-pill); font-family: var(--font-display); font-weight: 650; font-size: 0.95rem; letter-spacing: -0.035em; line-height: 1; color: var(--ink); }
 .nav-phone:hover { background: rgba(11, 15, 20, 0.06); }
 .nav-cta { min-height: 42px; padding: 0 1.15rem; font-family: var(--font-display); font-weight: 650; font-size: 0.95rem; letter-spacing: -0.03em; line-height: 1; }
@@ -741,7 +741,7 @@ dialog::backdrop { background: rgba(8, 12, 18, 0.45); -webkit-backdrop-filter: b
    -------------------------------------------------------------------------- */
 @media (max-width: 1080px) {
   .nav-list { display: none; }
-  .nav-capsule { padding-inline: 1rem; }
+  .nav-capsule { padding-left: 1rem; }
   .nav-toggle { display: grid; }
   .nav-phone { display: none; }
   .bento { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 200px; }
@@ -756,6 +756,7 @@ dialog::backdrop { background: rgba(8, 12, 18, 0.45); -webkit-backdrop-filter: b
   .site-header { inset: 10px 0 auto; }
   .mobile-nav { top: calc(10px + var(--nav-h) + 8px); }
   .nav-cta { display: none; }
+  .nav-capsule { padding-inline: 1rem; }
   .nav-capsule { gap: 0.5rem; }
   .nav-logo img { height: 80px; }
   .hero { min-height: min(92svh, 760px); padding-bottom: 2.5rem; }
