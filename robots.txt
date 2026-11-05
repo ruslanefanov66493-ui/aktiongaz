@@ -1,3 +1,4 @@
-User-agent: *
+User-Agent: *
 Allow: /
+
 Sitemap: https://aktiongazz.vercel.app/sitemap.xml
