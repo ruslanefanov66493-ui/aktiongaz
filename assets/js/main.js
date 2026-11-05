@@ -25,6 +25,38 @@
   onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });
 
+  /* ---------- Background loops ---------- */
+  // The poster frame is the same photograph, so dropping the video costs nothing.
+  if (reduced) {
+    $$('[data-loop]').forEach((video) => {
+      video.removeAttribute('autoplay');
+      video.pause();
+    });
+  } else if (navigator.connection && navigator.connection.saveData) {
+    $$('[data-loop]').forEach((video) => {
+      const poster = video.getAttribute('poster');
+      const img = document.createElement('img');
+      img.src = poster;
+      img.alt = '';
+      video.replaceWith(img);
+    });
+  } else {
+    // Autoplay is unreliable with preload="metadata", so start each loop when
+    // it scrolls into view and stop it again once it is off screen.
+    const loops = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        const video = entry.target;
+        if (entry.isIntersecting) {
+          const playing = video.play();
+          if (playing) playing.catch(() => {});
+        } else {
+          video.pause();
+        }
+      });
+    }, { rootMargin: '200px' });
+    $$('[data-loop]').forEach((video) => loops.observe(video));
+  }
+
   /* ---------- Mobile nav ---------- */
   const toggle = $('[data-nav-toggle]');
   const mobileNav = $('[data-mobile-nav]');

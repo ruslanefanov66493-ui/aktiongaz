@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://aktiongazz.vercel.app/sitemap.xml
