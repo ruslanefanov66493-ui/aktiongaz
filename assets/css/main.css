@@ -899,6 +899,22 @@ dialog::backdrop { background: rgba(8, 12, 18, 0.45); -webkit-backdrop-filter: b
 .loop-band__text p { margin: 0; color: rgba(255,255,255,.86); }
 .loop-band .eyebrow { color: var(--blue-soft); }
 
+/* Полоса с закреплённым фоном: кадр стоит на месте, текст уезжает вверх. */
+.photo-strip {
+  position: relative; display: grid; align-items: end;
+  min-height: min(68svh, 580px); padding: var(--gutter);
+  overflow: clip; isolation: isolate; color: #fff;
+  background-size: cover; background-position: center;
+}
+.photo-strip__shade {
+  position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(180deg, rgba(8,12,18,.25) 0%, rgba(8,12,18,.4) 45%, rgba(8,12,18,.82) 100%);
+}
+/* Фиксированный фон на тач-экранах рвёт прокрутку, поэтому только для мыши. */
+@media (hover: hover) and (pointer: fine) and (min-width: 641px) {
+  .photo-strip { background-attachment: fixed; }
+}
+
 /* --------------------------------------------------------------------------
    Motion — reveal on scroll
    -------------------------------------------------------------------------- */
