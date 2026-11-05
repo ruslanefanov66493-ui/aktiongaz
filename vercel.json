@@ -1,6 +1,13 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
+  "redirects": [
+    { "source": "/produkciya-grpsh-gru-pgb", "destination": "/produkciya-grpsh", "permanent": true },
+    { "source": "/produkciya-kotelnoe-oborudovanie", "destination": "/produkciya-kotelnye-ustanovki", "permanent": true },
+    { "source": "/produkciya-regulyatory-davleniya", "destination": "/produkciya-grpsh", "permanent": true },
+    { "source": "/produkciya-predohranitelnye-klapany", "destination": "/produkciya-grpsh", "permanent": true },
+    { "source": "/produkciya-truboprovodnye-detali", "destination": "/produkciya-gru", "permanent": true }
+  ],
   "headers": [
     {
       "source": "/assets/content/(.*)",

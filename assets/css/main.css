@@ -390,7 +390,8 @@ h3 { font-size: var(--fs-h3); letter-spacing: -0.02em; }
    Hero
    -------------------------------------------------------------------------- */
 .hero {
-  position: relative; min-height: min(100svh, 940px); display: grid; align-items: center; justify-items: center;
+  /* Ровно экран: иначе снизу выглядывает полоса следующей секции. */
+  position: relative; min-height: 100svh; display: grid; align-items: center; justify-items: center;
   color: #fff; overflow: clip; isolation: isolate; text-align: center;
   padding: calc(16px + var(--nav-h) + 2rem) var(--gutter) 3.25rem;
 }
@@ -415,6 +416,21 @@ h3 { font-size: var(--fs-h3); letter-spacing: -0.02em; }
 .hero:has(.stat-row) .hero__scroll { display: none; }
 .hero__scroll { position: absolute; bottom: 1.5rem; left: 50%; transform: translateX(-50%); color: rgba(255, 255, 255, 0.7); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; animation: bob 2.4s ease-in-out infinite; }
 @keyframes bob { 50% { transform: translate(-50%, 6px); } }
+
+/* На невысоких экранах первый экран ужимается, чтобы кнопки и счётчики
+   помещались целиком и следующая секция не выглядывала. */
+@media (min-width: 641px) and (max-height: 900px) {
+  .hero { padding-top: calc(16px + var(--nav-h) + 1rem); padding-bottom: 1.75rem; }
+  .hero__inner { gap: 0.7rem; }
+  .hero__title { font-size: clamp(2.1rem, 3.6vw, 2.9rem); }
+  .hero__lead { font-size: 1rem; max-width: 62ch; }
+  .hero__eyebrow { padding: 0.4rem 0.9rem; font-size: 0.82rem; }
+  .hero__actions { margin-top: 0.2rem; }
+  .hero .stat-row { margin-top: 0.8rem; }
+  .hero .stat { padding: 0.6rem 0.9rem; }
+  .hero .stat strong { font-size: 1.2rem; }
+  .hero .stat span { font-size: 0.74rem; }
+}
 
 /* --------------------------------------------------------------------------
    Sections
@@ -817,6 +833,38 @@ dialog::backdrop { background: rgba(8, 12, 18, 0.45); -webkit-backdrop-filter: b
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 .shot:hover .shot__cap, .shot:focus-visible .shot__cap { opacity: 1; transform: none; }
+.shot-grid--sm { grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 0.75rem; }
+
+/* Раздел → месяц съёмки → кадры */
+.chip-bar--wrap { justify-content: center; margin-bottom: 3rem; }
+.chip-bar--wrap .chip b { font-weight: 700; color: var(--blue); }
+.chip-bar--wrap .chip:hover b { color: inherit; }
+.photo-block { margin-bottom: 4rem; scroll-margin-top: calc(var(--nav-h) + 2rem); }
+.photo-block__head { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 1.5rem; padding-bottom: 0.9rem; border-bottom: 1px solid var(--line); }
+.photo-block__head h2 { margin: 0; font-size: clamp(1.5rem, 2.6vw, 2.1rem); }
+.photo-block__count { padding: 0.35rem 0.8rem; font-size: 0.8rem; font-weight: 600; white-space: nowrap; }
+.shot-month { margin-bottom: 2rem; }
+.shot-month h3 {
+  display: flex; align-items: center; gap: 0.6rem; margin: 0 0 0.9rem;
+  font-size: 1rem; font-weight: 600; letter-spacing: -0.01em; color: var(--muted);
+}
+.shot-month h3 small { padding: 0.1rem 0.5rem; border-radius: var(--r-pill); background: rgba(11, 15, 20, 0.06); font-size: 0.75rem; }
+
+/* --------------------------------------------------------------------------
+   Case cards — одна съёмка = один объект
+   -------------------------------------------------------------------------- */
+.case-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+.case-card { display: grid; grid-template-rows: auto 1fr; overflow: hidden; }
+.case-card__media { display: block; aspect-ratio: 4 / 3; overflow: hidden; background: rgba(11, 15, 20, 0.06); }
+.case-card__media img { width: 100%; height: 100%; object-fit: cover; transition: transform var(--dur-slow) var(--ease); }
+.case-card:hover .case-card__media img { transform: scale(1.04); }
+.case-card__body { display: grid; gap: 0.5rem; align-content: start; padding: 1.25rem 1.35rem 1.35rem; }
+.case-card__body h3 { margin: 0; font-size: 1.15rem; }
+.case-card__body p { margin: 0; color: var(--glass-muted); font-size: 0.92rem; }
+.case-card__strip { display: flex; align-items: center; gap: 0.45rem; margin-top: 0.35rem; }
+.case-card__shot { width: 64px; height: 48px; border-radius: var(--r-sm); overflow: hidden; flex: none; }
+.case-card__shot img { width: 100%; height: 100%; object-fit: cover; }
+.case-card__more { font-size: 0.85rem; font-weight: 600; color: var(--muted); }
 
 /* --------------------------------------------------------------------------
    Consent, map, legal text
@@ -875,7 +923,7 @@ dialog::backdrop { background: rgba(8, 12, 18, 0.45); -webkit-backdrop-filter: b
   .nav-toggle { display: grid; }
   .nav-phone { display: none; }
   .bento { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 200px; }
-  .why-grid, .card-grid, .products, .doc-grid, .info-grid, .prod-grid { grid-template-columns: repeat(2, 1fr); }
+  .why-grid, .card-grid, .products, .doc-grid, .info-grid, .prod-grid, .case-grid { grid-template-columns: repeat(2, 1fr); }
   .steps { grid-template-columns: repeat(2, 1fr); }
   .masonry { columns: 2; }
   .about__grid, .contact-grid, .product-hero { grid-template-columns: 1fr; }
@@ -890,17 +938,27 @@ dialog::backdrop { background: rgba(8, 12, 18, 0.45); -webkit-backdrop-filter: b
   .nav-capsule { padding-inline: 1rem; }
   .nav-capsule { gap: 0.5rem; }
   .nav-logo img { height: 48px; }
-  .hero { min-height: min(92svh, 760px); padding-bottom: 2.5rem; }
-  .hero__inner { gap: 0.85rem; }
-  .hero__title { font-size: clamp(2.35rem, 10.5vw, 3.15rem); }
+  .hero { min-height: 100svh; padding-bottom: 2.5rem; }
+  .hero__inner { gap: 0.6rem; }
+  .hero__title { font-size: clamp(2rem, 9vw, 2.6rem); }
+  .hero__lead { font-size: 0.98rem; }
   .pill-row { gap: 0.35rem; }
   .pill-row .chip { min-height: 36px; padding: 0.4rem 0.8rem; font-size: 0.8rem; }
+  /* Категории уезжают в одну прокручиваемую строку: три ряда чипов
+     вытесняли кнопки и счётчики за пределы экрана. */
+  .hero .pill-row { flex-wrap: nowrap; justify-content: flex-start; max-width: 100%; overflow-x: auto; scrollbar-width: none; }
+  .hero .pill-row::-webkit-scrollbar { display: none; }
+  .hero .stat-row { gap: 0.5rem; margin-top: 0.7rem; }
+  .hero .stat { flex-basis: calc(50% - 0.5rem); padding: 0.55rem 0.7rem; }
+  .hero .stat strong { font-size: 1.05rem; }
+  .hero .stat span { font-size: 0.7rem; }
   .rail { grid-auto-columns: 84vw; }
   .rail__nav { display: none; }
   .bento { grid-template-columns: 1fr 1fr; grid-auto-rows: 160px; }
   .bento__item--w2 { grid-column: span 2; }
-  .why-grid, .card-grid, .products, .doc-grid, .info-grid, .prod-grid, .steps, .spec-grid { grid-template-columns: 1fr; }
-  .shot-grid { grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+  .why-grid, .card-grid, .products, .doc-grid, .info-grid, .prod-grid, .steps, .spec-grid, .case-grid { grid-template-columns: 1fr; }
+  .shot-grid, .shot-grid--sm { grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+  .photo-block__head { flex-wrap: wrap; gap: 0.5rem; }
   .shot__cap { display: none; }
   .stat { flex-basis: 140px; padding: 0.8rem 0.9rem; }
   .masonry { columns: 1; }
